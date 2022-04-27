@@ -5,6 +5,7 @@ const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const vaciarCarritobtn = document.querySelector('#vaciar-carrito');
 const listaProductos = document.querySelector('#lista-productos');
+const contadorCarrito = document.getElementById('contadorCarrito');
 
 //arrays
 let articulosCarrito = []; 
@@ -26,6 +27,7 @@ function cargarEventListeners(){
 
     // Al Vaciar el carrito
     vaciarCarritobtn.addEventListener('click', vaciarCarrito);
+    
 }
 
 //Funciones
@@ -35,6 +37,13 @@ function agregarProducto(e){
     if(e.target.classList.contains('agregar-carrito')){
         const producto = e.target.parentElement.parentElement;
         leerDatosProducto(producto);
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Agregaste el producto al carrito',
+            showConfirmButton: false,
+            timer: 1500
+          })
     }
 }
 
@@ -81,6 +90,7 @@ function eliminarProducto(e) {
          articulosCarrito = articulosCarrito.filter(producto => producto.id !== productoId);
 
          carritoHTML();
+         
     }
 }
 
@@ -109,6 +119,7 @@ function carritoHTML(){
         //Agrego el HTML del carrito en el tbody
         contenedorCarrito.appendChild(row);
     });
+    contadorCarrito.innerText = carrito.length;
 
     // Agregar el carrito de compras al storage
     sincronizarStorage();
@@ -121,22 +132,31 @@ function sincronizarStorage() {
 // Elimina los productos del carrito en el DOM
 function vaciarCarrito() {
     // contenedorCarrito.innerHTML = '';
-
+    
 
     while(contenedorCarrito.firstChild) {
          contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+         Swal.fire({
+            title: 'Estas Seguro?',
+            text: "Se borraran todos los productos del carrito",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Estoy seguro!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Bien!',
+                'Vaciaste el carrito.',
+                'success'
+              )
+            }
+          })
+    
      }
+     
 }
 
 const button = document.getElementById(`agregar-carrito${producto.id}`);
-    button.addEventListener('click', () => {
-        carrito(producto.id);
-        Swal({
-            title:'genial',
-            Text:'jajaj',
-            icon:'success',
-            confirm: 'ok',
-            timer: 3000
-        })
-    });
 

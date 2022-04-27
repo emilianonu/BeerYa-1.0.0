@@ -19,6 +19,11 @@ header {
 .img{
     width: 30%;
 }
+#contadorCarrito{
+    color: #e1e1e1;
+    text-align: right;
+    font-size: 25px;
+}
 @media (min-width: 750px) {
     header {
         text-align: left;
