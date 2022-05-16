@@ -5,7 +5,7 @@ const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const vaciarCarritobtn = document.querySelector('#vaciar-carrito');
 const listaProductos = document.querySelector('#lista-productos');
-const contadorCarrito = document.getElementById('contadorCarrito');
+const contadorCarrito = document.querySelector('#contadorCarrito');
 
 //arrays
 let articulosCarrito = []; 
@@ -97,10 +97,8 @@ function eliminarProducto(e) {
 //Muestra al carrito de compras en el html
 function carritoHTML(){
 
-    vaciarCarrito();
-    
-
-
+    vaciarCarrito2();
+    let contador = 0
     //recorro el carrito y lo agrego al html
     articulosCarrito.forEach(producto => {
         const row = document.createElement('tr');
@@ -115,11 +113,13 @@ function carritoHTML(){
                 <a href="#" class="borrar-producto" data-id="${producto.id}">X</a>
             </td>
         `;
-
+        contador++
         //Agrego el HTML del carrito en el tbody
         contenedorCarrito.appendChild(row);
     });
-    contadorCarrito.innerText = carrito.length;
+
+    console.log( contador)
+    contadorCarrito.innerText = contador;
 
     // Agregar el carrito de compras al storage
     sincronizarStorage();
@@ -151,12 +151,22 @@ function vaciarCarrito() {
                 'Vaciaste el carrito.',
                 'success'
               )
+              articulosCarrito = []
+              sincronizarStorage();
+              contadorCarrito.innerText = 0;
             }
           })
-    
      }
      
 }
 
+function vaciarCarrito2() {
+    // contenedorCarrito.innerHTML = '';
+    
+
+    while(contenedorCarrito.firstChild) {
+         contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+         }
+        }
 const button = document.getElementById(`agregar-carrito${producto.id}`);
 
