@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/custom.css">
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
 
 </head>
 <body>
@@ -38,6 +39,7 @@
                                 <tbody></tbody>
                             </table>
                             <a href="#" id="vaciar-carrito" class="button u-full-width">Vaciar Carrito</a>
+                            <a href="#" id="terminar-compra" class="button u-full-width">Terminar Compra</a>
                         </div>
                     </li>
                 </ul>
@@ -201,7 +203,11 @@
                     </div> <!--.card-->
             </div>
         </div> <!--.row-->
-    </div>    
+    </div>
+    
+    <!--.google maps-->
+    <div class="tituloMapa">Donde nos encontramos</div>
+    <div id="mapa" class="mapa"></div>
 
     <footer id="footer" class="footer">
         <div class="container">
@@ -227,6 +233,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
 
 </body>
 </html>

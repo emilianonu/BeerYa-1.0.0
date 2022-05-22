@@ -6,6 +6,18 @@ const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const vaciarCarritobtn = document.querySelector('#vaciar-carrito');
 const listaProductos = document.querySelector('#lista-productos');
 const contadorCarrito = document.querySelector('#contadorCarrito');
+const terminarCompra = document.querySelector('#terminar-compra');
+
+//Uso la api de leaflets.com para mostrar el mapa
+const tilesProvider = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+let map = L.map('mapa').setView([-34.806369, -58.280196], 13)
+
+L.tileLayer(tilesProvider, {
+    maxZoom: 18,
+}).addTo(map)
+
+let marker = L.marker([-34.806369, -58.280196]).addTo(map)
 
 //arrays
 let articulosCarrito = []; 
@@ -27,6 +39,7 @@ function cargarEventListeners(){
 
     // Al Vaciar el carrito
     vaciarCarritobtn.addEventListener('click', vaciarCarrito);
+    terminarCompra.addEventListener('click', checkout);
     
 }
 
@@ -148,7 +161,7 @@ function vaciarCarrito() {
             if (result.isConfirmed) {
               Swal.fire(
                 'Bien!',
-                'Vaciaste el carrito.',
+                'Compraste todos los productos.',
                 'success'
               )
               articulosCarrito = []
@@ -169,4 +182,34 @@ function vaciarCarrito2() {
          }
         }
 const button = document.getElementById(`agregar-carrito${producto.id}`);
+
+function checkout() {
+    // contenedorCarrito.innerHTML = '';
+    
+
+    while(contenedorCarrito.firstChild) {
+         contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+         Swal.fire({
+            title: 'Finalizar Compra?',
+            text: "Comprar todos los productos del carrito",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Estoy seguro!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Gracias por su Compra',
+                ':) :).',
+                'success'
+              )
+              articulosCarrito = []
+              sincronizarStorage();
+              contadorCarrito.innerText = 0;
+            }
+          })
+     }
+     
+}
 
